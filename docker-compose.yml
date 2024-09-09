@@ -15,7 +15,6 @@ services:
       - db
       - redis
     environment:
-      - PYTHONPATH=/usr/src/app/src
       - CELERY_BROKER_URL=redis://redis:6379/0
       - DATABASE_URL=postgres://postgres:1031@db:5432/event_management
       - DEBUG=1
@@ -48,21 +47,6 @@ services:
       - redis
       - db
     environment:
-      - PYTHONPATH=/usr/src/app/src
-      - CELERY_BROKER_URL=redis://redis:6379/0
-      - DATABASE_URL=postgres://postgres:1031@db:5432/event_management
-
-  celery-beat:
-    build: .
-    command: celery -A src.config beat --loglevel=info
-    volumes:
-      - .:/usr/src/app
-    working_dir: /usr/src/app
-    depends_on:
-      - redis
-      - db
-    environment:
-      - PYTHONPATH=/usr/src/app/src
       - CELERY_BROKER_URL=redis://redis:6379/0
       - DATABASE_URL=postgres://postgres:1031@db:5432/event_management
 
