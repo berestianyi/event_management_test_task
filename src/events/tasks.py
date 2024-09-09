@@ -8,10 +8,10 @@ load_dotenv()
 
 
 @shared_task
-def send_confirmation_email(email: str, confirmation_url: str):
+def send_registration_email(email, event_title):
     send_mail(
-        subject='Email Confirmation',
-        message=f'Please confirm your email by clicking the following link: {confirmation_url}',
+        subject=f"Registration Confirmation for {event_title}",
+        message=f"Thank you for registering for {event_title}! We look forward to your participation.",
         from_email=os.getenv('EMAIL_HOST_USER'),
         recipient_list=[email],
         fail_silently=False,
